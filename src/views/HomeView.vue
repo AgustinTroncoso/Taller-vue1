@@ -1,18 +1,48 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h1>{{ nombreLista }}</h1>
+    <H3>Reenombrar</H3>
+    <input v-model="nombreLista" placeholder="Nombre de la lista" />
+    
+    <div>   
+      <H3>Agregar Tarea</H3>
+       <input v-model="nuevaTarea" placeholder="Nueva Tarea" />
+    <button @click="agregar">Agregar Tarea</button>
+</div>
+
+    <ul>
+      <li v-for="(tarea, index) in tareas" :key="index">
+        <input v-model="tarea.nombre" />
+        <button @click="eliminar(index)">Eliminar</button>
+      
+      </li>
+    </ul>
   </div>
-</template>
+</template> 
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
-}
+  data() {
+    return {
+      nombreLista: "Lista de quehaceres",
+      tareas: [
+       
+      ],
+      nuevaTarea: "",
+    };
+  },
+  methods: {
+    renombrar(){
+
+    },
+    agregar() {
+      this.tareas.push({ nombre: this.nuevaTarea });
+      this.nuevaTarea = "";
+    },
+    eliminar(index) {
+      this.tareas.splice(index, 1);
+    }
+  },
+};
 </script>
+
